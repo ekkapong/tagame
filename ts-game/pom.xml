@@ -5,7 +5,7 @@
 	<groupId>ts-game</groupId>
 	<artifactId>ts-game</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+	<packaging>war</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +26,13 @@
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
 			<version>2.8.0</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.hsqldb/hsqldb -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.4.0</version>
 		</dependency>
 
 	</dependencies>

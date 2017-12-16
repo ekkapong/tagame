@@ -2,3 +2,7 @@
 RemoteSystemsTempFiles/.project
 ts-game/.settings/
 ts-game/target/
+/.recommenders/
+Servers/.settings/
+Servers/.project
+Servers/
