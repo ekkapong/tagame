@@ -27,15 +27,21 @@
 						<f:selectItems value="#{mainView.servers}" />
 					</p:selectOneMenu>
 				</pm:field>
-
+				<pm:field>
+					<p:outputLabel for="geokey" value="GeoKey:" />
+					<p:inputText id="geokey" placeholder="1234.00:5678.00" />
+				</pm:field>
 				<p:commandButton value="Execute" update="display" actionListener="#{mainView.execute}" />
+				<p:commandButton value="Clear" update="mainForm" process="@this" />
 
 				<p:outputPanel id="display" >
 					<h2>Node Result</h2>
 					<pm:field>
-						<p:inputText value="#{mainView.nodeResult.id}" readonly="true"/>
-						<p:inputText value="#{mainView.nodeResult.title}" readonly="true"/>
-						<p:inputTextarea value="#{mainView.nodeResult.desciption}" readonly="true"/>
+						<p:outputLabel for="titleResult" value="Select Server:" />
+						<p:inputTextarea id="titleResult" value="#{mainView.nodeResult.title}" readonly="true"/>
+						<p:outputLabel for="desResult" value="Select Server:" />
+						<p:inputTextarea id="desResult" value="#{mainView.nodeResult.desciption}" readonly="true"/>
+						<p:spacer></p:spacer>
                     		<p:outputPanel  style="text-align:center">
 							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image1}" />
 							<p:spacer></p:spacer>
