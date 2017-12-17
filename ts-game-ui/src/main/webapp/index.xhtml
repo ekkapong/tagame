@@ -23,9 +23,12 @@
 			<h:form id="mainForm">
 				<pm:field>
 					<p:outputLabel for="targetServer" value="Select Server:" />
-					<p:selectOneMenu id="targetServer" value="#{mainView.selectServer}">
-						<f:selectItems value="#{mainView.servers}" />
-					</p:selectOneMenu>
+					<p:outputPanel id="displayServer" >
+						<p:selectOneMenu id="targetServer" value="#{mainView.selectServer}">
+							<f:selectItems value="#{mainView.servers}" />
+							<p:ajax event="change"  listener="#{mainView.selectServerChange}" />
+						</p:selectOneMenu>
+					</p:outputPanel>
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="geokey" value="GeoKey:" />
@@ -45,9 +48,9 @@
                     		<p:outputPanel  style="text-align:center">
 							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image1}" />
 							<p:spacer></p:spacer>
-							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image1}" />
+							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image2}" />
 							<p:spacer></p:spacer>
-							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image1}" />
+							<h:graphicImage value="data:image/jpg;base64,#{mainView.nodeResult.image3}" />
 						</p:outputPanel>
 					</pm:field>
 				</p:outputPanel>
@@ -67,24 +70,30 @@
 			<h:form id="settingsForm">
 				<pm:field>
 					<p:outputLabel for="cental" value="Cental IP" />
-					<p:inputText id="cental" placeholder="192.168.1.123:8080" />
+					<p:inputText id="cental" value="#{mainView.ipConfig.centralIp}" placeholder="http://192.168.1.123:8080" />
+					<p:commandButton value="Activate" action="#{mainView.activateCentral}" />
+					<p:commandButton value="Check Active" update="displayCentralStatus" action="#{mainView.checkAcitveCentral}" />
+					<p:outputPanel id="displayCentralStatus" >
+						<p:outputLabel for="activeStatus" value="Active Status" />
+						<p:inputText id="activeStatus" value="#{mainView.activeStatus}" />
+					</p:outputPanel>
 				</pm:field>
 
 				<pm:field>
 					<p:outputLabel for="groupA" value="Group A IP:" />
-					<p:password id="groupA" placeholder="192.168.1.123:8080" />
+					<p:inputText id="groupA" value="#{mainView.ipConfig.aIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupB" value="Group B IP:" />
-					<p:password id="groupB" placeholder="192.168.1.123:8080" />
+					<p:inputText id="groupB" value="#{mainView.ipConfig.bIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupC" value="Group C IP:" />
-					<p:password id="groupC" placeholder="192.168.1.123:8080" />
+					<p:inputText id="groupC" value="#{mainView.ipConfig.cIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupD" value="Group D IP:" />
-					<p:password id="groupD" placeholder="192.168.1.123:8080" />
+					<p:inputText id="groupD" value="#{mainView.ipConfig.dIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<p:commandButton value="Save" action="#{mainView.saveSettings}" />
 			</h:form>
