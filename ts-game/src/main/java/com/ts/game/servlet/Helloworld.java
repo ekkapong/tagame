@@ -1,7 +1,6 @@
 package com.ts.game.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,19 +31,41 @@ public class Helloworld extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	Gson gson = new Gson();
-	response.setContentType("application/json;charset=UTF-8");
-
-	try (PrintWriter out = response.getWriter()) {
+	try {
+	    Gson gson = new Gson();
 	    ExampleModel exampleModel = new ExampleModel();
 
 	    exampleModel.setName("Test");
 	    exampleModel.setPassword("Password");
 
-	    out.print(gson.toJson(exampleModel));
-	} catch (Exception e) {
-	    e.printStackTrace();
+	    response.setContentType("application/json");
+
+	    response.getOutputStream().print(gson.toJson(exampleModel));
+	    response.getOutputStream().flush();
+	} catch (Exception ex) {
+	    ex.printStackTrace();
+	    // status.setSuccess(false);
+	    // status.setDescription(ex.getMessage());
+	    // response.getOutputStream().print(gson.toJson(status));
+	    // response.getOutputStream().flush();
 	}
+
+	// response.setContentType("application/json;charset=UTF-8");
+	// PrintWriter out = response.getWriter();
+	// // Assuming your json object is **jsonObject**, perform the following, it
+	// will return your json object
+	// out.print(objectToReturn);
+	// out.flush();
+	// try (PrintWriter out = response.getWriter()) {
+	// ExampleModel exampleModel = new ExampleModel();
+	//
+	// exampleModel.setName("Test");
+	// exampleModel.setPassword("Password");
+	//
+	// out.print(gson.toJson(exampleModel));
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
 
     }
 
