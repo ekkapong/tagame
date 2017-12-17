@@ -21,11 +21,12 @@
 		<pm:content>
 
 			<h:form id="mainForm">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 				<pm:field>
-					<p:outputLabel for="targetServer" value="Select Server:" />
+					<p:outputLabel for="targetServer" value="Select Server: " />
 					<p:outputPanel id="displayServer" >
 						<p:selectOneMenu id="targetServer" value="#{mainView.selectServer}">
-							<f:selectItems value="#{mainView.servers}" />
+							<f:selectItems value="#{settingView.servers}" />
 							<p:ajax event="change"  listener="#{mainView.selectServerChange}" />
 						</p:selectOneMenu>
 					</p:outputPanel>
@@ -68,34 +69,35 @@
 		<pm:content>
 
 			<h:form id="settingsForm">
+				    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+				
 				<pm:field>
 					<p:outputLabel for="cental" value="Cental IP" />
-					<p:inputText id="cental" value="#{mainView.ipConfig.centralIp}" placeholder="http://192.168.1.123:8080" />
+					<p:inputText id="cental" value="#{settingView.ipConfig.centralIp}" placeholder="http://192.168.1.123:8080" />
+					<p:outputLabel for="myId" value="IP/PORT" />
+					<p:inputText id="myId" value="#{settingView.ipConfig.teamServerIp}" placeholder="192.168.1.123:8080" />
 					<p:commandButton value="Activate" action="#{mainView.activateCentral}" />
-					<p:commandButton value="Check Active" update="displayCentralStatus" action="#{mainView.checkAcitveCentral}" />
-					<p:outputPanel id="displayCentralStatus" >
-						<p:outputLabel for="activeStatus" value="Active Status" />
-						<p:inputText id="activeStatus" value="#{mainView.activeStatus}" />
-					</p:outputPanel>
+					<p:commandButton value="Check Active"  action="#{mainView.checkAcitveCentral}" />
+					
 				</pm:field>
 
 				<pm:field>
 					<p:outputLabel for="groupA" value="Group A IP:" />
-					<p:inputText id="groupA" value="#{mainView.ipConfig.aIp}" placeholder="http://192.168.1.123:8080" />
+					<p:inputText id="groupA" value="#{settingView.ipConfig.aIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupB" value="Group B IP:" />
-					<p:inputText id="groupB" value="#{mainView.ipConfig.bIp}" placeholder="http://192.168.1.123:8080" />
+					<p:inputText id="groupB" value="#{settingView.ipConfig.bIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupC" value="Group C IP:" />
-					<p:inputText id="groupC" value="#{mainView.ipConfig.cIp}" placeholder="http://192.168.1.123:8080" />
+					<p:inputText id="groupC" value="#{settingView.ipConfig.cIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
 				<pm:field>
 					<p:outputLabel for="groupD" value="Group D IP:" />
-					<p:inputText id="groupD" value="#{mainView.ipConfig.dIp}" placeholder="http://192.168.1.123:8080" />
+					<p:inputText id="groupD" value="#{settingView.ipConfig.dIp}" placeholder="http://192.168.1.123:8080" />
 				</pm:field>
-				<p:commandButton value="Save" action="#{mainView.saveSettings}" />
+				<p:commandButton value="Save" update=":main:mainForm:displayServer" action="#{settingView.saveSettings}" />
 			</h:form>
 
 		</pm:content>

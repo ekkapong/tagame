@@ -1,5 +1,8 @@
 package com.ts.game.ui.service;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
@@ -18,9 +21,8 @@ public class RestfulService {
 	    return response;
 
 	} catch (Exception e) {
-
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "error", e.getMessage()));
 	    e.printStackTrace();
-
 	}
 	return null;
     }
@@ -37,9 +39,8 @@ public class RestfulService {
 	    return response;
 
 	} catch (Exception e) {
-
+	    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "error", e.getMessage()));
 	    e.printStackTrace();
-
 	}
 	return null;
     }

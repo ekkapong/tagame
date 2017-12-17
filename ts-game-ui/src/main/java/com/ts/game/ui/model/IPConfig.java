@@ -3,6 +3,7 @@ package com.ts.game.ui.model;
 public class IPConfig {
 
     private String centralIp;
+    private String teamServerIp;
     private String aIp;
     private String bIp;
     private String cIp;
@@ -18,6 +19,14 @@ public class IPConfig {
 
     public void setCentralIp(String centralIp) {
 	this.centralIp = centralIp;
+    }
+
+    public String getTeamServerIp() {
+	return teamServerIp;
+    }
+
+    public void setTeamServerIp(String teamServerIp) {
+	this.teamServerIp = teamServerIp;
     }
 
     public String getaIp() {

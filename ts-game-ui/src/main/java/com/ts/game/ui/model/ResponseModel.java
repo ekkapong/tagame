@@ -15,7 +15,6 @@ public class ResponseModel implements Serializable {
 
     public ResponseModel() {
 	super();
-	// TODO Auto-generated constructor stub
     }
 
     public String getStatus() {

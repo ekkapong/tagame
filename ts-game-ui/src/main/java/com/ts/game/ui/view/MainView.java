@@ -1,23 +1,21 @@
 package com.ts.game.ui.view;
 
 import java.io.Serializable;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
-import javax.faces.view.ViewScoped;
 
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
-import com.ts.game.ui.model.IPConfig;
 import com.ts.game.ui.model.Merchant;
 import com.ts.game.ui.model.NodeModel;
+import com.ts.game.ui.service.CentralService;
 import com.ts.game.ui.service.RestfulService;
 
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class MainView implements Serializable {
 
     /**
@@ -25,38 +23,21 @@ public class MainView implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private final String CENTRAL_SERVER = "CENTRAL_SERVER";
-    private final String A_SERVER = "A_SERVER";
-    private final String B_SERVER = "B_SERVER";
-    private final String C_SERVER = "C_SERVER";
-    private final String D_SERVER = "D_SERVER";
-
-    private Map<String, String> servers;
-
     private String selectServer;
     private String activeStatus;
 
-    private IPConfig ipConfig = new IPConfig();
     private NodeModel nodeResult = new NodeModel();
+
+    private RestfulService restfulService = new RestfulService();
+    private CentralService centralService = new CentralService();
 
     @PostConstruct
     public void init() {
-	servers = new LinkedHashMap<String, String>();
-	initIpConfig(this.ipConfig);
-	selectServer = "Hello";
-    }
-
-    public void initIpConfig(IPConfig ipConfig) {
-	servers.put(CENTRAL_SERVER, ipConfig.getCentralIp());
-	servers.put(A_SERVER, ipConfig.getaIp());
-	servers.put(B_SERVER, ipConfig.getbIp());
-	servers.put(C_SERVER, ipConfig.getcIp());
-	servers.put(D_SERVER, ipConfig.getdIp());
+	selectServer = "";
     }
 
     public void execute() {
 
-	RestfulService restfulService = new RestfulService();
 	Gson gson = new Gson();
 	Merchant merchant = new Merchant();
 	merchant.setDevice_unique_id("");
@@ -80,31 +61,25 @@ public class MainView implements Serializable {
     }
 
     public void selectServerChange(final AjaxBehaviorEvent event) {
-
-	System.out.println(selectServer);
+	centralService.setBaseUrl(selectServer);
     }
 
     public void activateCentral() {
-
+//	if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) && StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
+//	    String[] arr = ipConfig.getTeamServerIp().split(":");
+//	    centralService.setBaseUrl(ipConfig.getCentralIp());
+//	    centralService.activate(arr[0], arr[1]);
+//	}
     }
 
     public void checkAcitveCentral() {
-	activeStatus = "ok";
-    }
+	// if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) &&
+	// StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
+	// String[] arr = ipConfig.getTeamServerIp().split(":");
+	// centralService.setBaseUrl(ipConfig.getCentralIp());
+	// centralService.active(arr[0]);
+	// }
 
-    public String saveSettings() {
-	initIpConfig(this.ipConfig);
-//	RequestContext.getCurrentInstance().update("pm:main:mainForm:displayServer");
-
-	return "pm:main";
-    }
-
-    public Map<String, String> getServers() {
-	return servers;
-    }
-
-    public void setServers(Map<String, String> servers) {
-	this.servers = servers;
     }
 
     public String getSelectServer() {
@@ -129,14 +104,6 @@ public class MainView implements Serializable {
 
     public void setActiveStatus(String activeStatus) {
 	this.activeStatus = activeStatus;
-    }
-
-    public IPConfig getIpConfig() {
-	return ipConfig;
-    }
-
-    public void setIpConfig(IPConfig ipConfig) {
-	this.ipConfig = ipConfig;
     }
 
 }
