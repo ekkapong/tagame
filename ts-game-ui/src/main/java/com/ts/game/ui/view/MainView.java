@@ -4,11 +4,15 @@ import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.google.gson.Gson;
 import com.sun.jersey.api.client.ClientResponse;
+import com.ts.game.ui.model.IPConfig;
 import com.ts.game.ui.model.Merchant;
 import com.ts.game.ui.model.NodeModel;
 import com.ts.game.ui.service.CentralService;
@@ -22,6 +26,9 @@ public class MainView implements Serializable {
      * 
      */
     private static final long serialVersionUID = 1L;
+
+    @ManagedProperty(value = "#{settingView}")
+    private SettingView settingView;
 
     private String selectServer;
     private String activeStatus;
@@ -65,21 +72,24 @@ public class MainView implements Serializable {
     }
 
     public void activateCentral() {
-//	if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) && StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
-//	    String[] arr = ipConfig.getTeamServerIp().split(":");
-//	    centralService.setBaseUrl(ipConfig.getCentralIp());
-//	    centralService.activate(arr[0], arr[1]);
-//	}
+
+	IPConfig ipConfig = settingView.getIpConfig();
+
+	if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) && StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
+	    String[] arr = ipConfig.getTeamServerIp().split(":");
+	    centralService.setBaseUrl(ipConfig.getCentralIp());
+	    centralService.activate(arr[0], arr[1]);
+	}
     }
 
     public void checkAcitveCentral() {
-	// if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) &&
-	// StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
-	// String[] arr = ipConfig.getTeamServerIp().split(":");
-	// centralService.setBaseUrl(ipConfig.getCentralIp());
-	// centralService.active(arr[0]);
-	// }
+	IPConfig ipConfig = settingView.getIpConfig();
 
+	if (StringUtils.isNotEmpty(ipConfig.getCentralIp()) && StringUtils.isNotEmpty(ipConfig.getTeamServerIp())) {
+	    String[] arr = ipConfig.getTeamServerIp().split(":");
+	    centralService.setBaseUrl(ipConfig.getCentralIp());
+	    centralService.active(arr[0]);
+	}
     }
 
     public String getSelectServer() {
@@ -104,6 +114,14 @@ public class MainView implements Serializable {
 
     public void setActiveStatus(String activeStatus) {
 	this.activeStatus = activeStatus;
+    }
+
+    public SettingView getSettingView() {
+	return settingView;
+    }
+
+    public void setSettingView(SettingView settingView) {
+	this.settingView = settingView;
     }
 
 }

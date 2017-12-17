@@ -10,7 +10,7 @@ import javax.faces.bean.ManagedBean;
 
 import com.ts.game.ui.model.IPConfig;
 
-@ManagedBean
+@ManagedBean(name = "settingView")
 @ApplicationScoped
 public class SettingView implements Serializable {
 
