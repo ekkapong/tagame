@@ -9,19 +9,16 @@ public class NodeModel implements Serializable {
      */
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
     private String title;
     private String desciption;
-    private String image1;
-    private String image2;
-    private String image3;
+    private NodeImageModel images;
 
-    public Integer getId() {
-	return id;
+    public NodeImageModel getImages() {
+	return images;
     }
 
-    public void setId(Integer id) {
-	this.id = id;
+    public void setImages(NodeImageModel images) {
+	this.images = images;
     }
 
     public String getTitle() {
@@ -38,30 +35,6 @@ public class NodeModel implements Serializable {
 
     public void setDesciption(String desciption) {
 	this.desciption = desciption;
-    }
-
-    public String getImage1() {
-	return image1;
-    }
-
-    public void setImage1(String image1) {
-	this.image1 = image1;
-    }
-
-    public String getImage2() {
-	return image2;
-    }
-
-    public void setImage2(String image2) {
-	this.image2 = image2;
-    }
-
-    public String getImage3() {
-	return image3;
-    }
-
-    public void setImage3(String image3) {
-	this.image3 = image3;
     }
 
 }
